@@ -47,7 +47,7 @@ pipeline {
         stage('Updating image tag') {
             steps {
                 script {
-                    git branch: 'main', url: 'https://github.com/Sganesh-30/gke-deployment.git'
+                    git branch: 'main', url: 'git@github.com:Sganesh-30/gke-deployment.git'
                     
                     def IMAGE_NAME = "/dotted-task-461114-m5/gke-app/gke-sampleapp"
                     def BUILD_TAG = "v${BUILD_NUMBER}"
