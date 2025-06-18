@@ -44,10 +44,22 @@ pipeline {
                 '''
             }
         }
+        stage('Updating image tag'){
+            steps {
+                script {
+                    git branch: 'main', url: 'https://github.com/Sganesh-30/gke-deployment.git'
+
+                    sh '''
+                        sed -i 's|image: asia-south1-docker.pkg.dev${IMAGE_NAME}:.*|image: asia-south1-docker.pkg.dev${IMAGE_NAME}:${BUILD_TAG}|' /Kubernetes/deployment.yaml
+                    '''                 
+                }
+            }
+        }
         stage('Deploy to GKE'){
             steps {
                 sh '''
-                    kubectl set image deployment/gke-app gke-app=asia-south1-docker.pkg.dev/$PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG
+                    kubectl apply -f deployment.yaml
+                    kubectl apply -f service.yaml
                 '''
             }
         }
