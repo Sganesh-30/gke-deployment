@@ -21,7 +21,6 @@ pipeline {
             steps {
                 withCredentials([file(credentialsId: 'gcp-sa-account', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]) {
                     sh '''
-                        sudo apt-get install -y kubectl
                         gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
                         gcloud config set project $PROJECT_ID
                         gcloud config set compute/zone $CLUSTER_ZONE
