@@ -40,7 +40,7 @@ pipeline {
             steps {
                 sh '''
                     gcloud auth configure-docker $REGION-docker.pkg.dev
-                    docker push asia-south1-docker.pkg/$PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG
+                    docker push asia-south1-docker.pkg.dev/$PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG
                 '''
             }
         }
