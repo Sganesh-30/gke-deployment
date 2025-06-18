@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sample-app
+  template:
+    metadata:
+      labels:
+        app: sample-app
+    spec:
+      containers:
+      - name: sample-app
+        image: asia-south1-docker.pkg.dev/dotted-task-461114-m5/gke-app/sampleapp@sha256:4828fcb95911d02a64062d2df8aa4d0fc20fe13105080c1197a881040f50db05
+        ports:
+        - containerPort: 3000
