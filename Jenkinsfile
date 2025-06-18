@@ -55,14 +55,17 @@ pipeline {
                     sh """
                         sed -i 's|image: asia-south1-docker.pkg.dev${IMAGE_NAME}:.*|image: asia-south1-docker.pkg.dev${IMAGE_NAME}:${COMMIT_ID}|' "Kubernetes/deployment.yaml"
                     """
-
+                    withCredentials([usernameColonPassword(credentialsId: 'github-ssh', variable: 'SSH_KEY')]) {
                     sh '''
+                        eval \$(ssh-agent -s)
+                        ssh-add \$SSH_KEY
                         git config user.email "ganesh.s@gmail.com"
                         git config user.name "s-ganesh30"
                         git add Kubernetes/deployment.yaml
                         git commit -m "Update image tag to ${BUILD_TAG}"
                         git push origin main
                     '''
+                     }
                 }
             }
         }
