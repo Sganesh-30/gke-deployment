@@ -44,14 +44,17 @@ pipeline {
                 '''
             }
         }
-        stage('Updating image tag'){
+        stage('Updating image tag') {
             steps {
                 script {
                     git branch: 'main', url: 'https://github.com/Sganesh-30/gke-deployment.git'
-                    cd Kubernetes
-                    sh '''
-                        sed -i 's|image: asia-south1-docker.pkg.dev${IMAGE_NAME}:.*|image: asia-south1-docker.pkg.dev${IMAGE_NAME}:${BUILD_TAG}|' /Kubernetes/deployment.yaml
-                    '''                 
+                    
+                    def IMAGE_NAME = "/dotted-task-461114-m5/gke-app/gke-sampleapp"
+                    def BUILD_TAG = "v${BUILD_NUMBER}"
+
+                    sh """
+                        sed -i 's|image: asia-south1-docker.pkg.dev${IMAGE_NAME}:.*|image: asia-south1-docker.pkg.dev${IMAGE_NAME}:${BUILD_TAG}|' Kubernetes/deployment.yaml
+                    """
                 }
             }
         }
