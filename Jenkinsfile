@@ -60,10 +60,9 @@ pipeline {
         }
         stage('Deploy to GKE'){
             steps {
-                cd Kubernetes
                 sh '''
-                    kubectl apply -f deployment.yaml
-                    kubectl apply -f service.yaml
+                    kubectl apply -f Kubernetes/deployment.yaml
+                    kubectl apply -f Kubernetes/service.yaml
                 '''
             }
         }
