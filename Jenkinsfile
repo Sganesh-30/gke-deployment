@@ -53,7 +53,7 @@ pipeline {
                     def BUILD_TAG = "v${BUILD_NUMBER}"
 
                     sh """
-                        sed -i 's|image: asia-south1-docker.pkg.dev${IMAGE_NAME}:.*|image: asia-south1-docker.pkg.dev${IMAGE_NAME}:${BUILD_TAG}|' Kubernetes/deployment.yaml
+                        sed -i 's|image: asia-south1-docker.pkg.dev${IMAGE_NAME}:.*|image: asia-south1-docker.pkg.dev${IMAGE_NAME}:${BUILD_TAG}|' "Kubernetes/deployment.yaml"
                     """
                 }
             }
