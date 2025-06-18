@@ -21,7 +21,7 @@ pipeline {
             steps {
                 withCredentials([file(credentialsId: 'gcp-sa-account', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]) {
                     sh '''
-                        gcloud components install gke-gcloud-auth-plugin
+                        sudo apt-get install google-cloud-cli-gke-gcloud-auth-plugin
                         gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
                         gcloud config set project $PROJECT_ID
                         gcloud config set compute/zone $CLUSTER_ZONE
