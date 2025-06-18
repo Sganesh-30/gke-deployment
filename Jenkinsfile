@@ -47,7 +47,7 @@ pipeline {
         stage('Deploy to GKE'){
             steps {
                 sh '''
-                    kubectl set image deployment/gke-app gke-app=asia-south1-docker.pkg.dev/$PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG --record
+                    kubectl set image deployment/gke-app gke-app=asia-south1-docker.pkg.dev/$PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG
                 '''
             }
         }
