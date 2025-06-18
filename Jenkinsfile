@@ -48,7 +48,7 @@ pipeline {
             steps {
                 script {
                     git branch: 'main', url: 'https://github.com/Sganesh-30/gke-deployment.git'
-
+                    cd Kubernetes
                     sh '''
                         sed -i 's|image: asia-south1-docker.pkg.dev${IMAGE_NAME}:.*|image: asia-south1-docker.pkg.dev${IMAGE_NAME}:${BUILD_TAG}|' /Kubernetes/deployment.yaml
                     '''                 
