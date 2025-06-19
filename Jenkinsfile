@@ -13,9 +13,12 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git credentialsId: 'github-ssh-key', git branch: 'main', url: 'https://github.com/Sganesh-30/gke-deployment.git'
+                git branch: 'main',
+                url: 'git@github.com:Sganesh-30/gke-deployment.git',
+                credentialsId: 'github-ssh-key'
             }
         }
+
 
         stage('Auth GCloud') {
             steps {
